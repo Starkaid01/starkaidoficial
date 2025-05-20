@@ -12,30 +12,34 @@
     <script>
         (function() {
             function normalizePath(path) {
-            return path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
+                return path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
             }
 
-            const publicPaths = ['/luizgustavo', '/outrapublica'];
+            // Apenas páginas que não precisam de login ficam aqui
+            const publicPaths = ['/outrapublica'];
+
             const currentPath = normalizePath(window.location.pathname);
 
             if (publicPaths.includes(currentPath)) {
-            return;
+                // Libera acesso sem token
+                return;
             }
 
+            // Páginas protegidas exigem token
             const token = sessionStorage.getItem('authToken');
             if (!token) {
-            window.location.href = 'https://www.starkaid.com/?redirect=' + encodeURIComponent(window.location.pathname);
-            return;
+                window.location.href = 'https://www.starkaid.com/?redirect=' + encodeURIComponent(window.location.pathname);
+                return;
             }
 
             fetch('/.netlify/functions/validate', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token })
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token })
             }).then(response => {
-            if (!response.ok) {
-                window.location.href = 'https://www.starkaid.com/?redirect=' + encodeURIComponent(window.location.pathname);
-            }
+                if (!response.ok) {
+                    window.location.href = 'https://www.starkaid.com/?redirect=' + encodeURIComponent(window.location.pathname);
+                }
             });
         })();
 
@@ -45,8 +49,8 @@
             const currentTime = Date.now() / 1000;
 
             if (decoded.exp < currentTime) {
-            sessionStorage.removeItem('authToken');
-            window.location.href = 'https://www.starkaid.com/?redirect=' + encodeURIComponent(window.location.pathname);
+                sessionStorage.removeItem('authToken');
+                window.location.href = 'https://www.starkaid.com/?redirect=' + encodeURIComponent(window.location.pathname);
             }
         }
     </script>

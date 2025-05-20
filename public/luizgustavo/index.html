@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clínica Odontológica Sorriso Perfeito | São João del Rei</title>
-    
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt_decode_min.js"></script>5,
     <!-- Script de verificação de acesso -->
     <script>
        (function() {
@@ -31,15 +31,16 @@
             });
         })();
         
-        // Verificação também no hashchange (para âncoras)
-        window.addEventListener('hashchange', function() {
-            const authorized = sessionStorage.getItem('authorized');
-            const correctPassword = "Deusmaior1424";
-            
-            if (!authorized || authorized !== correctPassword) {
-                window.location.href = '/starkaid/';
+        const token = sessionStorage.getItem('authToken');
+        if (token) {
+            const decoded = jwt_decode(token);
+            const currentTime = Date.now() / 1000;
+
+            if (decoded.exp < currentTime) {
+                sessionStorage.removeItem('authToken');
+                window.location.href = '/starkaid/?redirect=' + encodeURIComponent(window.location.pathname);
             }
-        });
+        }
     </script>
     
     <!-- Restante do head -->
@@ -1446,6 +1447,8 @@
     </a>
 
     <!-- JavaScript -->
+    <script src="/js/login.js"></script>
+    <script src="/js/validacao.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Mobile Menu Toggle

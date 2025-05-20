@@ -17,7 +17,7 @@
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt_decode_min.js"></script>5,
     <style>
         :root {
             --primary-color: #2563eb;
@@ -1202,6 +1202,8 @@
     </a>
 
     <!-- JavaScript -->
+    <script src="/js/login.js"></script>
+    <script src="/js/validacao.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Mobile Menu Toggle
@@ -1230,7 +1232,6 @@
         const passwordForm = document.getElementById('passwordForm');
         const luizGustavoLink = document.getElementById('luizGustavoLink');
         const luizGustavoBtn = document.getElementById('luizGustavoBtn');
-        const correctPassword = "Deusmaior1424";
 
         // Verifica se há um redirecionamento pendente (vindo da página protegida)
         const urlParams = new URLSearchParams(window.location.search);
@@ -1290,7 +1291,7 @@
                 sessionStorage.setItem('authToken', data.token);
                 window.location.href = '/starkaid/luizgustavo/';
             } else {
-                alert('Senha incorreta. Tente novamente.');
+                alert(data.message);
                 passwordInput.value = '';
                 passwordInput.focus();
             }

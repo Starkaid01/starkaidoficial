@@ -9,11 +9,18 @@
     <!-- Script de verificação de acesso -->
     <script>
        (function() {
+            const publicPaths = ['/luizgustavo', '/outrapublica']; // caminhos sem proteção
+
+            if (publicPaths.includes(window.location.pathname)) {
+                return; // deixa acessar sem token
+            }
+
             const token = sessionStorage.getItem('authToken');
             if (!token) {
                 window.location.href = '/starkaid/?redirect=' + encodeURIComponent(window.location.pathname);
                 return;
             }
+
 
             // Valida localmente se quiser usando jwt-decode
             // const decoded = jwt_decode(token);

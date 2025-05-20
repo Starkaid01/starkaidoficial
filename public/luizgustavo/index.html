@@ -76,6 +76,12 @@
     <!-- Favicon, CSS, etc... -->
 
     <style>
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
         :root {
             --primary-color: #2d9cdb;
             --secondary-color: #2f80ed;
@@ -891,6 +897,7 @@
         }
         
         @media (max-width: 768px) {
+            
             .section {
                 padding: 60px 0;
             }
@@ -919,13 +926,26 @@
             .mobile-menu-btn {
                 display: block;
             }
+
+
+
+            
+            body {
+                position: relative;
+            }
+            
+            body.nav-open {
+                overflow: hidden;
+            }
+
+
             
             .nav-menu {
+                width: 80%;
+                max-width: 100%;
+                right: -100%;
                 position: fixed;
                 top: 0;
-                right: -100%;
-                width: 80%;
-                max-width: 400px;
                 height: 100vh;
                 background-color: var(--white);
                 flex-direction: column;
@@ -958,6 +978,7 @@
                 background: none;
                 border: none;
                 cursor: pointer;
+                z-index: 1002; /* Garante que fique acima do menu */
             }
         }
         
@@ -1463,20 +1484,23 @@
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const closeMenuBtn = document.querySelector('.close-menu-btn');
         const navMenu = document.querySelector('.nav-menu');
-        
+
         mobileMenuBtn.addEventListener('click', () => {
             navMenu.classList.add('active');
+            document.body.classList.add('nav-open');
         });
-        
+
         closeMenuBtn.addEventListener('click', () => {
             navMenu.classList.remove('active');
+            document.body.classList.remove('nav-open');
         });
-        
+
         // Close menu when clicking on a nav link
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
+                document.body.classList.remove('nav-open');
             });
         });
         

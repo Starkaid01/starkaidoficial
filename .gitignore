@@ -12,8 +12,6 @@ yarn-error.log*
 # VSCode settings
 .vscode/
 
-# Build output
-public/
 
 # Ambiente local
 .env

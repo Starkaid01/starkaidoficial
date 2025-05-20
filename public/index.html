@@ -1275,15 +1275,19 @@
             }
         });
 
-        passwordForm.addEventListener('submit', (e) => {
+        passwordForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const passwordInput = document.getElementById('password');
-            
-            if (passwordInput.value === correctPassword) {
-                // Armazena a autorização
-                sessionStorage.setItem('authorized', passwordInput.value);
-                
-                // Redireciona para a página do projeto Luiz Gustavo
+
+            const response = await fetch('/.netlify/functions/login', {
+                method: 'POST',
+                body: JSON.stringify({ password: passwordInput.value })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                sessionStorage.setItem('authToken', data.token);
                 window.location.href = '/starkaid/luizgustavo/';
             } else {
                 alert('Senha incorreta. Tente novamente.');

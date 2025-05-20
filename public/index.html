@@ -19,6 +19,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt_decode_min.js"></script>5,
     <style>
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
         :root {
             --primary-color: #2563eb;
             --secondary-color: #1e40af;
@@ -65,7 +70,7 @@
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
         
         .btn {
@@ -146,10 +151,12 @@
         
         /* Header */
         header {
+            width: 100vw;
+            max-width: 100vw;
+            overflow: hidden;
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
             z-index: 1000;
             transition: all 0.3s ease;
             padding: 20px 0;
@@ -712,6 +719,10 @@
         }
         
         @media (max-width: 768px) {
+            .header-container {
+                padding: 0 10px;
+            }
+
             .section {
                 padding: 60px 0;
             }
@@ -740,13 +751,19 @@
             .mobile-menu-btn {
                 display: block;
             }
+
+            
+            .nav-menu.active {
+                right: 0;
+            }
             
             .nav-menu {
+                width: 100%;
+                max-width: 100%;
+
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 80%;
-                max-width: 400px;
                 height: 100vh;
                 background-color: var(--white);
                 flex-direction: column;
@@ -792,6 +809,10 @@
                 background: none;
                 border: none;
                 cursor: pointer;
+            }
+
+            .container {
+                padding: 0 10px;
             }
         }
         

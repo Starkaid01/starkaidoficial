@@ -1,0 +1,23 @@
+{
+  "name": "starkaidoficial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Starkaid01/starkaidoficial.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Starkaid01/starkaidoficial/issues"
+  },
+  "homepage": "https://github.com/Starkaid01/starkaidoficial#readme",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2"
+  }
+}

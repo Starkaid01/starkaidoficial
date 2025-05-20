@@ -24,7 +24,7 @@
 
             const token = sessionStorage.getItem('authToken');
             if (!token) {
-                window.location.href = '/starkaid/?redirect=' + encodeURIComponent(window.location.pathname);
+                window.location.href = 'www.starkaid.com/?redirect=' + encodeURIComponent(window.location.pathname);
                 return;
             }
 
@@ -35,7 +35,7 @@
             })
             .then(response => {
                 if (!response.ok) {
-                    window.location.href = '/starkaid/?redirect=' + encodeURIComponent(window.location.pathname);
+                    window.location.href = 'www.starkaid.com/?redirect=' + encodeURIComponent(window.location.pathname);
                 }
             });
         })();
@@ -47,7 +47,7 @@
 
             if (decoded.exp < currentTime) {
                 sessionStorage.removeItem('authToken');
-                window.location.href = '/starkaid/?redirect=' + encodeURIComponent(window.location.pathname);
+                window.location.href = 'www.starkaid.com/?redirect=' + encodeURIComponent(window.location.pathname);
             }
         }
     </script>
@@ -1456,8 +1456,6 @@
     </a>
 
     <!-- JavaScript -->
-    <script src="/functions/login.js"></script>
-    <script src="/functions/validacao.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Mobile Menu Toggle

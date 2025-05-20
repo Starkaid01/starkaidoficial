@@ -7,36 +7,35 @@
     <title>Clínica Odontológica Sorriso Perfeito | São João del Rei</title>
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt_decode_min.js"></script>
     <!-- Script de verificação de acesso -->
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+
     <script>
-       (function() {
-            // Função para remover barra no final da string, se existir
+        (function() {
             function normalizePath(path) {
-                return path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
+            return path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
             }
 
             const publicPaths = ['/luizgustavo', '/outrapublica'];
-
             const currentPath = normalizePath(window.location.pathname);
 
             if (publicPaths.includes(currentPath)) {
-                return; // libera acesso sem token
+            return;
             }
 
             const token = sessionStorage.getItem('authToken');
             if (!token) {
-                window.location.href = 'www.starkaid.com/?redirect=' + encodeURIComponent(window.location.pathname);
-                return;
+            window.location.href = 'https://www.starkaid.com/?redirect=' + encodeURIComponent(window.location.pathname);
+            return;
             }
 
-            // Validação extra via backend
             fetch('/.netlify/functions/validate', {
-                method: 'POST',
-                body: JSON.stringify({ token })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    window.location.href = 'www.starkaid.com/?redirect=' + encodeURIComponent(window.location.pathname);
-                }
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token })
+            }).then(response => {
+            if (!response.ok) {
+                window.location.href = 'https://www.starkaid.com/?redirect=' + encodeURIComponent(window.location.pathname);
+            }
             });
         })();
 
@@ -46,8 +45,8 @@
             const currentTime = Date.now() / 1000;
 
             if (decoded.exp < currentTime) {
-                sessionStorage.removeItem('authToken');
-                window.location.href = 'www.starkaid.com/?redirect=' + encodeURIComponent(window.location.pathname);
+            sessionStorage.removeItem('authToken');
+            window.location.href = 'https://www.starkaid.com/?redirect=' + encodeURIComponent(window.location.pathname);
             }
         }
     </script>

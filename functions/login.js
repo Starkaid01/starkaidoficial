@@ -7,6 +7,10 @@ exports.handler = async (event) => {
     const correctPassword = process.env.ACCESS_PASSWORD;
     const jwtSecret = process.env.JWT_SECRET;
 
+    console.log('ACCESS_PASSWORD:', correctPassword);
+    console.log('JWT_SECRET:', jwtSecret);
+
+
     if (!correctPassword || !jwtSecret) {
       return {
         statusCode: 500,

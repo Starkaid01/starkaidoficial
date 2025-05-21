@@ -237,6 +237,26 @@ const cartItemsContainer = document.querySelector('.cart-items');
 const cartCount = document.querySelector('.cart-count');
 const totalPriceElement = document.querySelector('.total-price');
 
+// Menu Mobile
+const menuToggle = document.querySelector('.mobile-menu-toggle');
+const nav = document.querySelector('.nav');
+
+menuToggle.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    menuToggle.innerHTML = nav.classList.contains('active') ? 
+        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+});
+
+// Fechar menu ao clicar em um link (para mobile)
+document.querySelectorAll('.nav a').forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+            nav.classList.remove('active');
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    });
+});
+
 // Função para formatar preço
 function formatPrice(price) {
     return new Intl.NumberFormat('pt-BR', {
